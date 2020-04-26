@@ -1,6 +1,4 @@
-'use strict';
-
-const e = React.createElement;
+import React from 'react';
 
 function Square(props) {
   return (
@@ -43,7 +41,7 @@ class Board extends React.Component {
   }
 }
 
-class Game extends React.Component {
+export default class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -139,8 +137,3 @@ function calculateWinner(squares) {
   }
   return null;
 }
-
-const domContainer = document.querySelector('#root');
-ReactDOM.render(e(Game), domContainer);
-
-// ========================================
