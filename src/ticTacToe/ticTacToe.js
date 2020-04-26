@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Hello World</title>
-    <link rel="stylesheet" type="text/css" href="index.css">
-    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-    
-    <!-- Don't use this in production: -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  </head>
-  <body>
-    <h>Hello World!</h>
-    <div id="root"></div>
-    <script type="text/babel">
-
-      'use strict';
+'use strict';
 
 const e = React.createElement;
 
@@ -30,7 +13,7 @@ function Square(props) {
 class Board extends React.Component {
   renderSquare(i) {
     return (
-      <Square 
+      <Square
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
       />
@@ -71,7 +54,7 @@ class Game extends React.Component {
       stepNumber: 0
     };
   }
-  
+
   handleClick(i) {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
@@ -88,42 +71,42 @@ class Game extends React.Component {
       stepNumber: history.length,
     });
   }
-  
+
   jumpTo(step) {
     this.setState({
       stepNumber: step,
       xIsNext: (step % 2) === 0,
     });
   }
-  
+
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
-    
+
     const moves = history.map((step,move) => {
       const desc = move ?
         'Go to move #' + move :
         'Go to game start';
       return (
         <li key={move}>
-          <button 
+          <button
             onClick={() => this.jumpTo(move)}>{desc}</button>
         </li>
       );
     });
-    
+
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
-    
+
     return (
       <div className="game">
         <div className="game-board">
-          <Board 
+          <Board
             squares={current.squares}
             onClick={(i) => this.handleClick(i)}
           />
@@ -160,19 +143,4 @@ function calculateWinner(squares) {
 const domContainer = document.querySelector('#root');
 ReactDOM.render(e(Game), domContainer);
 
-    </script>
-    <!--
-      Note: this page is a great way to try React but it's not suitable for production.
-      It slowly compiles JSX with Babel in the browser and uses a large development build of React.
-
-      Read this section for a production-ready setup with JSX:
-      https://reactjs.org/docs/add-react-to-a-website.html#add-jsx-to-a-project
-
-      In a larger project, you can use an integrated toolchain that includes JSX instead:
-      https://reactjs.org/docs/create-a-new-react-app.html
-
-      You can also use React without JSX, in which case you can remove Babel:
-      https://reactjs.org/docs/react-without-jsx.html
-    -->
-  </body>
-</html>
+// ========================================
